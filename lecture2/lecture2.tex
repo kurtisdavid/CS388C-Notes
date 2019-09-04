@@ -1,0 +1,523 @@
+\documentclass[psamsfonts, 12pt]{amsart}
+%
+%-------Packages---------
+%
+\usepackage[h margin=1 in, v margin=1 in]{geometry}
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{tikz-cd}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+\usepackage{amsthm}
+\usepackage{mathpazo}
+\usepackage{float}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{bibliography.bib}
+%\usepackage{charter} %another font
+%\usepackage{eulervm} %Vakil font
+\usepackage{yfonts}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{mathrsfs}
+\usepackage{fourier-orns}
+\usepackage[all]{xy}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{pdfsync}
+\usepackage{mathdots}
+\usepackage{calligra}
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[2]{%
+    \fontsize{48pt}{50pt}\selectfont
+    \def\svgwidth{\columnwidth}
+    \scalebox{#2}{\input{#1.pdf_tex}}
+}
+%
+\usepackage{tgpagella}
+\usepackage[T1]{fontenc}
+%
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Matlab,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+  }
+%
+%--------Theorem Environments--------
+%
+\newtheorem{thm}{Theorem}[section]
+\newtheorem*{thm*}{Theorem}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{lem*}{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+%
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem*{defn*}{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+%
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem*{claim}{Claim}
+\newtheorem*{aside*}{Aside}
+\newtheorem*{rem*}{Remark}
+\newtheorem*{hint*}{Hint}
+\newtheorem*{note}{Note}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+%
+%--------Macros--------
+\newcommand{\rpm}{\sbox0{$1$}\sbox2{$\scriptstyle\pm$}
+  \raise\dimexpr(\ht0-\ht2)/2\relax\box2 }
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\renewcommand{\sl}{\mathfrak{sl}}
+\newcommand{\Bord}{\mathsf{Bord}}
+\renewcommand{\hom}{\mathsf{Hom}}
+\renewcommand{\emptyset}{\varnothing}
+\renewcommand{\O}{\mathscr{O}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\ib}[1]{\textbf{\textit{#1}}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\dbar}{\overline{\partial}}
+\newcommand{\zbar}{\overline{z}}
+\renewcommand{\S}{\mathbb{S}}
+\newcommand{\V}{\vec{v}}
+\newcommand{\RP}{\mathbb{RP}}
+\newcommand{\CP}{\mathbb{CP}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\GL}{\mathsf{GL}}
+\newcommand{\SL}{\mathsf{SL}}
+\newcommand{\SP}{\mathsf{SP}}
+\newcommand{\SO}{\mathsf{SO}}
+\newcommand{\SU}{\mathsf{SU}}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\Bun}{\mathsf{Bun}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\bra}[2]{ \left[ #1, #2 \right] }
+\newcommand{\set}[1]{\left\lbrace #1 \right\rbrace}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\transv}{\mathrel{\text{\tpitchfork}}}
+\newcommand{\defeq}{\vcentcolon=}
+\newcommand{\enumbreak}{\ \\ \vspace{-\baselineskip}}
+\let\oldexists\exists
+\renewcommand\exists{\oldexists~}
+\let\oldL\L
+\renewcommand\L{\mathfrak{L}}
+\makeatletter
+\newcommand{\tpitchfork}{%
+  \vbox{
+    \baselineskip\z@skip
+    \lineskip-.52ex
+    \lineskiplimit\maxdimen
+    \m@th
+    \ialign{##\crcr\hidewidth\smash{$-$}\hidewidth\crcr$\pitchfork$\crcr}
+  }%
+}
+\makeatother
+\newcommand{\bd}{\partial}
+\newcommand{\lang}{\begin{picture}(5,7)
+\put(1.1,2.5){\rotatebox{45}{\line(1,0){6.0}}}
+\put(1.1,2.5){\rotatebox{315}{\line(1,0){6.0}}}
+\end{picture}}
+\newcommand{\rang}{\begin{picture}(5,7)
+\put(.1,2.5){\rotatebox{135}{\line(1,0){6.0}}}
+\put(.1,2.5){\rotatebox{225}{\line(1,0){6.0}}}
+\end{picture}}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\inter}{Int}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\indx}{ind}
+\DeclareMathOperator{\alt}{Alt}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\trace}{trace}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\Lie}{Lie}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\dv}{div}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\sheafhom}{\mathscr{H}\text{\kern -3pt {\calligra\large om}}\,}
+\newcommand*\myhrulefill{%
+   \leavevmode\leaders\hrule depth-2pt height 2.4pt\hfill\kern0pt}
+\newcommand\niceending[1]{%
+  \begin{center}%
+    \LARGE \myhrulefill \hspace{0.2cm} #1 \hspace{0.2cm} \myhrulefill%
+  \end{center}}
+\newcommand*\sectionend{\niceending{\decofourleft\decofourright}}
+\newcommand*\subsectionend{\niceending{\decosix}}
+\def\upint{\mathchoice%
+    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  \int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+%
+%--------Hypersetup--------
+%
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=blue,
+    urlcolor=blacksquare
+}
+%
+%--------Solution--------
+%
+\newenvironment{solution}
+  {\begin{proof}[Solution]}
+  {\end{proof}}
+%
+%--------Graphics--------
+%
+%\graphicspath{ {images/} }
+
+\begin{document}
+%
+\author{Kurtis David}
+%
+\title{CS388C: Lecture 2}
+%
+\maketitle
+%
+
+\section{Inclusion-Exclusion}
+
+\begin{equation}
+| A \cup B | = |A| + |B| - |A\cap B|
+\end{equation}
+
+\vspace{0.5em}
+\begin{prop}
+\[
+|\bigcup_{i=1}^nA_i| \geq \sum_{i=1}^n|A_i| - \sum_{i<j}|A_i \cap A_j |
+\]
+\end{prop}
+
+\begin{proof}
+\ \\
+
+Fix $x\in \bigcup_{i=1}^nA_i$. Say $x$ appears in \textbf{r} of the $A_i$.
+
+Then $x$ contributes $r-{r\choose2}$ elements to the RHS. Which is equivalent to:
+
+\begin{align*}
+&= r - \frac{r(r-1)}{2}\\
+&=r(1-\frac{r-1}{2})\\
+&\leq 1
+\end{align*}
+
+Therefore the LHS must be greater. (See $r \geq 3$)
+\end{proof}
+
+\begin{exmp}
+Suppose we have $n$ sets $A_1,...,A_n$ s.t. $|A_i| = k$ and $|A_i\cap A_j| \leq 1$.
+
+Using \textbf{Proposition 1.1}, we have:
+\[
+|\cup A_i| \geq nk - {n\choose 2}
+\]
+
+However, if $k <<< n$, this can be a negative lower bound, so we can relax to only the \textbf{first k} sets...
+
+\[
+|\cup^n A_i| \geq |\cup^k A_i| \geq k^2 - {k\choose2}
+\]
+\end{exmp}
+
+\begin{prop}
+\begin{align*}
+|\bigcup_{i=1}^nA_i| = \sum_{i=1}^n|A_i| &- \sum_{i<j}|A_i \cap A_j |\\
+&+\sum_{i<j<k}|A_i \cap A_j \cap A_k |\\
+&-\sum_{i<j<k<l}|A_i \cap A_j \cap A_k \cap A_l|\\
+&\ \vdots\\
+&\rpm |A_1 \cap A_2 \cap ... \cap A_n |
+\end{align*}
+\end{prop}
+
+\begin{proof} Let use the same strategy as before. i.e. Suppose $x\in \bigcup A_i$.
+
+Say $x$ appears in \textbf{r} of the $A_i$. We just need to find its contribution to the RHS:
+
+\begin{align*}
+\sum_{i=1}^n|A_i| &- \sum_{i<j}|A_i \cap A_j |\\
+&+\sum_{i<j<k}|A_i \cap A_j \cap A_k |\\
+&\ \vdots\\
+&\rpm |A_1 \cap A_2 \cap ... \cap A_n | \\
+&= r - {r\choose2} + {r\choose3} - {r\choose4} + ... \rpm 1\\
+&= {r\choose1} - {r\choose2} + {r\choose3} - {r\choose4} + ... \rpm {r\choose r}
+\end{align*}
+
+By the binomial theorem, we know this is exactly equal to
+\[
+{r\choose0} - (1-1)^r = 1
+\]
+
+\end{proof}
+
+\begin{defn}
+\underline{derangement} - permutation $\pi\ s.t.\ \forall i\ \pi(i)\neq i$
+\end{defn}
+
+\begin{exmp}
+Now let us try and find the \# derangements of a sequence of size $n$.
+\\
+
+We can try and frame this problem by breaking it up into smaller sets $A_i$ as before...
+\\
+
+Let $A_i = \left\lbrace \pi : \pi(i) = i \right\rbrace$. Then notice that:
+
+\[
+n! - \text{\# derangements} = |\bigcup A_i|
+\]
+
+Since there are $n!$ possible permutations. Now we can use \textbf{Proposition 1.3}. Notice that due to the definition of $A_i$, we can directly compute the value of each term -- since each set defines permutations that hold $1,2,...,n$ elements constant:
+
+\begin{align*}
+|\bigcup A_i| &= n \cdot (n-1)! - {n\choose2}\cdot(n-2)! + {n\choose3}\cdot(n-3)! + ...\ \rpm {n\choose n}1!\\
+&= n! - \frac{n!}{2!(n-2)!}\cdot(n-2)! + \frac{n!}{3!(n-3)!}\cdot(n-3)! + ...\ \rpm 1\\
+&= n! \cdot (1 - \frac{1}{2!} + \frac{1}{3!} + ...\ \rpm \frac{1}{n!} ) \\
+&= \frac{n!}{e}
+\end{align*}
+
+Recall that
+\[
+exp(x) = 1 + \frac{x}{1!} + \frac{x^2}{2!} + ...
+\]
+\\
+
+Thus we have that the number of derangements given $n$ is about
+
+\[
+n! (1 - \frac{1}{e})
+\]
+\end{exmp}
+
+\begin{rem*}
+
+There exist \textbf{\underline{Bonferroni Inequalities}} in the same form as \textbf{Proposition 1.1} that continuously add in longer intersection terms... e.g.:
+
+\[
+|\bigcup_{i=1}^nA_i| \leq \sum_{i=1}^n|A_i| - \sum_{i<j}|A_i \cap A_j | + \sum_{i<j<k}|A_i\cap A_j\cap A_k|
+\]
+
+\[
+|\bigcup_{i=1}^nA_i| \geq \sum_{i=1}^n|A_i| - \sum_{i<j}|A_i \cap A_j | + \sum_{i<j<k}|A_i\cap A_j\cap A_k| - \sum_{i<j<k<l}|A_i\cap A_j\cap A_k\cap A_l|
+\]
+\end{rem*}
+
+\section{Counting with Recursion}
+
+\begin{exmp}
+Consider a $2 \times n$ grid. $n = 5$ as shown:
+\[\begin{tikzcd}
+\draw[step=1.0,black,thin] grid (5,2);
+\end{tikzcd}\]
+
+\textbf{Question:} How many ways can we tile $1\times 2$ dominoes on this grid?
+\ \\
+
+\textbf{Solution:} This can be done by first noticing the following: if we place a single domino all the way to the left of this grid, we get exactly \textbf{2 situations}. The first is:
+
+\[\begin{tikzcd}
+\draw[step=1.0,black,thick, xshift=0.5cm,yshift=1cm] grid (1,2);
+\draw[step=1.0,black,thin, xshift=0.5cm,yshift=1cm] grid (5,2);
+\end{tikzcd}\]
+
+Once this domino is set, notice that we now have to fill a $2\times$\textbf{(n-1)} grid. i.e. if we define $T(n) = $ \# ways to tile an $2\times n$ grid, then we would only have to find $T(n-1)$.
+\\
+
+The second situation is:
+\[\begin{tikzcd}
+\draw[step=1.0,black,thick, xshift=0.5cm,yshift=1cm] grid (2,1);
+\draw[step=1.0,black,thin, xshift=0.5cm,yshift=1cm] grid (5,2);
+\end{tikzcd}\]
+
+When we place the domino like so, we are forced to place at least one domino to fill the space above the current one. We are then left with a $2\times $\textbf{(n-2)} grid to tile, i.e. $T(n-2)$ possibilities.
+\\
+
+Therefore, we have $T(n) = T(n-1) + T(n-2)$ as our recurrence relation.
+
+The base cases are $T(0) = 1$ and $T(1) = 1$. The answer then leads us to the Fibonacci numbers as they share the same relation, except we start with 0 indexing. Thus we have:
+
+\[
+T(n) = F_{n+1} = (n+1)^{th} \text{ Fibonacci number }
+\]
+
+\end{exmp}
+
+\section{Probabilistic Method}
+
+This section will now cover examples of how to use the \textit{Probabilistic Method} to prove the existence of solutions. In general, we will be showing that there is a non-zero probability of obtaining a valid solution using some type of random assignment.
+
+\begin{exmp}
+Let $S$ be a set of elements. Let $A_i \subseteq S$ such that $|A_i|=k$. (k-set)
+\\
+Define family $\mathcal{F}$ as a set of k-sets:
+\[
+\mathcal{F} = \left\lbrace A_1,A_2,...,A_n \right\rbrace
+\]
+\end{exmp}
+
+\begin{defn}
+A \underline{2-coloring} of $\mathcal{F}$ is a map $\mathcal{X}: S\rightarrow \left\lbrace 0,1 \right\rbrace$ such that no $A_i$ is \textbf{monochromatic}. i.e.:
+\[
+\forall i \exists j,k \in A_i\ s.t.\ \mathcal{X}(j) \neq \mathcal{X}(k)
+\]
+\end{defn}
+
+\begin{thm}
+If $n < 2^{k-1}$, then $\exists$ 2-coloring of $\mathcal{F}$.
+\end{thm}
+
+\begin{solution}
+We can employ the Probabilistic Method.
+\vspace{0.5em}
+
+First choose a coloring uniformly at random. We want to show:
+
+\begin{center}
+\textbf{With probability > 0}, we can get a valid 2-coloring of $\mathcal{F}$.
+\end{center}
+
+To do this, we can instead show its inverse:
+
+\begin{center}
+Pr$\left[ \exists \text{ monochromatic } A_i \right] < 1$
+\end{center}
+
+Let $E_i$ be the events (i.e. random colorings) such that $A_i$ is monochromatic. Then we are trying to compute:
+\[
+\text{Pr}\left[ \bigcup E_i \right] \leq \sum \text{Pr}\left[ E_i \right]
+\]
+
+By \textbf{Union Bound} inequality. Clearly $\text{Pr}\left[ E_i \right] = 2(\frac{1}{2})^k$, since we have 2 colors and each element is assigned with $\frac{1}{2}$ probability. Now since we know $n < 2^{k-1}$, then:
+
+\[
+\text{Pr}\left[ \bigcup E_i \right] \leq n \cdot 2(\frac{1}{2})^k < 1
+\]
+\end{solution}
+
+\vspace{1em}
+
+\begin{defn}
+\underline{Universal Set}. Let us define the following notation:
+
+\begin{center}
+Set of strings of length $n$: $A \subseteq \left\lbrace 0,1 \right\rbrace^n$
+\end{center}
+
+\begin{center}
+Set of $k < n$ indeces: $S = \left\lbrace i_1,i_2,...,i_k \right\rbrace$
+\end{center}
+
+
+\begin{center}
+Restriction of A onto S: $A_{|S} = \left\lbrace (a_{i_1},a_{i_2},...,a_{i_k}) : a = (a_1,...,a_n) \in A \right\rbrace$
+\end{center}
+
+Then $A$ is a \underline{(n,k) - Universal Set} if:
+
+\begin{center}
+$\forall S$, $A_{|S}$ contains all $2^k$ possible binary strings of length $k$.
+\end{center}
+\end{defn}
+
+\begin{exmp}
+\textbf{Question:} How large is a smallest $(n,k)$-universal set?
+
+\begin{thm}
+$\exists\ (n,k)$-universal sets of size $\leq 2^k(k\text{ln}(n) + 1)$
+\end{thm}
+
+\begin{proof}
+We will employ the Probabilistic Method again. Suppose $A$ contains $r$ random substrings. If we are trying to prove that these $(n,k)$ - universal sets of this size exist, then we want to show:
+
+\[
+\text{Pr}\left[ \exists A_{|S} \neq \left\lbrace 0,1 \right\rbrace^k \right] < 1
+\]
+
+To do this, let us further break this event into smaller ones, by considering every possible $v \in \left\lbrace 0,1 \right\rbrace^k$:
+
+\[
+\text{Pr}\left[ \bigcup_{v} \left\lbrace v\not\in A_{|S} \right\rbrace \right] \leq 2^k \cdot (1 - (\frac{1}{2})^k)^r
+\]
+
+This is because:
+\begin{enumerate}
+  \item Union Bound to get inequality.
+  \item $2^k$ possible $v$ exist
+  \item Given a substring of length $k$, $v$, then the probability of $A_{|S}$ not containing it would be $(1 - (\frac{1}{2})^k)^r$. Since $A$ contains $r$ random substrings and the probability of creating a random substring of length $k$ is $(\frac{1}{2})^k$.
+\end{enumerate}
+
+Further, we can extend the inequality:
+
+\begin{align*}
+&\leq 2^k \cdot (1 - (\frac{1}{2})^k)^r \\
+&\leq {n\choose k}2^k \cdot (1-2^{-k})^r \\
+&\leq \frac{n}{k!}2^k \cdot e^{-2^{-k}\cdot r}
+\end{align*}
+
+Now just set $r = 2^k(k\text{ln}(n) + 1) $. We get:
+
+\begin{align*}
+\text{Pr}\left[ \exists A_{|S} \neq \left\lbrace 0,1 \right\rbrace^k \right] &\leq
+\frac{n^k}{k!}2^ke^{-k\text{ln}(n)+1}\\
+&=\frac{2^k}{k!}\cdot \frac{1}{e}\\
+&< 1
+\end{align*}
+\end{proof}
+\end{exmp}
+
+\end{document}

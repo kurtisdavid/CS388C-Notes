@@ -1,0 +1,374 @@
+\documentclass[psamsfonts, 12pt]{amsart}
+%
+%-------Packages---------
+%
+\usepackage[h margin=1 in, v margin=1 in]{geometry}
+\usepackage{amssymb,amsfonts}
+\usepackage[all,arc]{xy}
+\usepackage{tikz-cd}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+\usepackage{amsthm}
+\usepackage{mathpazo}
+\usepackage{float}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{bibliography.bib}
+%\usepackage{charter} %another font
+%\usepackage{eulervm} %Vakil font
+\usepackage{yfonts}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{mathrsfs}
+\usepackage{fourier-orns}
+\usepackage[all]{xy}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{pdfsync}
+\usepackage{mathdots}
+\usepackage{calligra}
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[2]{%
+    \fontsize{48pt}{50pt}\selectfont
+    \def\svgwidth{\columnwidth}
+    \scalebox{#2}{\input{#1.pdf_tex}}
+}
+%
+\usepackage{tgpagella}
+\usepackage[T1]{fontenc}
+%
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Matlab,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+  }
+%
+%--------Theorem Environments--------
+%
+\newtheorem{thm}{Theorem}[section]
+\newtheorem*{thm*}{Theorem}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{lem*}{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+%
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem*{defn*}{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+%
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem*{claim}{Claim}
+\newtheorem*{aside*}{Aside}
+\newtheorem*{rem*}{Remark}
+\newtheorem*{hint*}{Hint}
+\newtheorem*{note}{Note}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+%
+%--------Macros--------
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\renewcommand{\sl}{\mathfrak{sl}}
+\newcommand{\Bord}{\mathsf{Bord}}
+\renewcommand{\hom}{\mathsf{Hom}}
+\renewcommand{\emptyset}{\varnothing}
+\renewcommand{\O}{\mathscr{O}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\ib}[1]{\textbf{\textit{#1}}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\dbar}{\overline{\partial}}
+\newcommand{\zbar}{\overline{z}}
+\renewcommand{\S}{\mathbb{S}}
+\newcommand{\V}{\vec{v}}
+\newcommand{\RP}{\mathbb{RP}}
+\newcommand{\CP}{\mathbb{CP}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\GL}{\mathsf{GL}}
+\newcommand{\SL}{\mathsf{SL}}
+\newcommand{\SP}{\mathsf{SP}}
+\newcommand{\SO}{\mathsf{SO}}
+\newcommand{\SU}{\mathsf{SU}}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\Bun}{\mathsf{Bun}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\bra}[2]{ \left[ #1, #2 \right] }
+\newcommand{\set}[1]{\left\lbrace #1 \right\rbrace}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\transv}{\mathrel{\text{\tpitchfork}}}
+\newcommand{\defeq}{\vcentcolon=}
+\newcommand{\enumbreak}{\ \\ \vspace{-\baselineskip}}
+\let\oldexists\exists
+\renewcommand\exists{\oldexists~}
+\let\oldL\L
+\renewcommand\L{\mathfrak{L}}
+\makeatletter
+\newcommand{\tpitchfork}{%
+  \vbox{
+    \baselineskip\z@skip
+    \lineskip-.52ex
+    \lineskiplimit\maxdimen
+    \m@th
+    \ialign{##\crcr\hidewidth\smash{$-$}\hidewidth\crcr$\pitchfork$\crcr}
+  }%
+}
+\makeatother
+\newcommand{\bd}{\partial}
+\newcommand{\lang}{\begin{picture}(5,7)
+\put(1.1,2.5){\rotatebox{45}{\line(1,0){6.0}}}
+\put(1.1,2.5){\rotatebox{315}{\line(1,0){6.0}}}
+\end{picture}}
+\newcommand{\rang}{\begin{picture}(5,7)
+\put(.1,2.5){\rotatebox{135}{\line(1,0){6.0}}}
+\put(.1,2.5){\rotatebox{225}{\line(1,0){6.0}}}
+\end{picture}}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\inter}{Int}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\indx}{ind}
+\DeclareMathOperator{\alt}{Alt}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\trace}{trace}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\Lie}{Lie}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\dv}{div}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\sheafhom}{\mathscr{H}\text{\kern -3pt {\calligra\large om}}\,}
+\newcommand*\myhrulefill{%
+   \leavevmode\leaders\hrule depth-2pt height 2.4pt\hfill\kern0pt}
+\newcommand\niceending[1]{%
+  \begin{center}%
+    \LARGE \myhrulefill \hspace{0.2cm} #1 \hspace{0.2cm} \myhrulefill%
+  \end{center}}
+\newcommand*\sectionend{\niceending{\decofourleft\decofourright}}
+\newcommand*\subsectionend{\niceending{\decosix}}
+\def\upint{\mathchoice%
+    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  \int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+%
+%--------Hypersetup--------
+%
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=blue,
+    urlcolor=blacksquare
+}
+%
+%--------Solution--------
+%
+\newenvironment{solution}
+  {\begin{proof}[Solution]}
+  {\end{proof}}
+%
+%--------Graphics--------
+%
+%\graphicspath{ {images/} }
+
+\begin{document}
+%
+\author{Kurtis David}
+%
+\title{CS388C: Lecture 1}
+%
+\maketitle
+%
+
+\section{Circuits}
+
+\begin{defn}
+\underline{Circuit} (\textbf{ckt}) - a function $f: \{0,1\}^n \rightarrow \{0,1\}$. i.e. any function of $n$ bits is computable by a \textbf{ckt} of \textit{size} $\leq n\cdot2^n$
+\end{defn}
+
+\begin{defn}
+\underline{Size} (of a ckt) - \# of nodes in a ckt. e.g. and, or, not gates.
+\end{defn}
+
+\begin{quest}
+Do $\exists$ functions requiring exponential size ckts?
+\end{quest}
+
+\textbf{Answer:} Yes.
+
+\begin{solution}\
+\vspace{0.5em}
+\begin{itemize}
+  \item Many possible $f: \{0,1\}^n\rightarrow\{0,1\}$
+  \begin{itemize}
+    \item $2^n$ inputs, $2$ outputs $\Rightarrow 2^{2^{n}}$ possible circuits
+  \end{itemize}
+  \item "Few" ckts of small size $s$ (few in comparison to above)
+\end{itemize}
+
+\[
+\text{\# ckts of size } s \leq \text{(\# possible ways to add a new gate)}^s
+\]
+
+But there are 3 types of nodes (add/or/not) and $s\choose2$ nodes to choose from when adding these gates so \# possible ways = $\frac{3s(s-1)}{2}$.
+
+\[
+\therefore \text{\# ckts of size } s \leq (2s^2)^s \leq s^{3s}
+\]
+
+If we say $s = \frac{2^n}{3n}$ then we end up with $... \leq \frac{2^n}{3n}^{\frac{2^n}{n}} = \frac{1}{3n}^{\frac{2^n}{n}} {2^n}^{\frac{2^n}{n}}$
+
+$\therefore$ most fns require ckts of size $\geq \frac{2^n}{3n}$
+
+\end{solution}
+
+\section{Languages}
+
+\begin{defn}
+\underline{Language} - a subset of $\Sigma^{*} = \bigcup_{i=0}^{\infty}\Sigma^{i}$ mapped to $\Sigma = \{0,1\}$. i.e. $f:\Sigma^{*} \rightarrow \Sigma $ (all lengths of binary strings!)
+\end{defn}
+
+To show $NP\neq P$, it suffices to show a language in $NP$ requires ckt families of size $> n^c\ \forall c$.
+
+\underline{Open Q}: Find a language in $NP$ requiring ckts of size $\omega(n)$
+
+\pagebreak
+
+\section{Basic Counting}
+
+\begin{quest}
+How many ways can $r$ objects be placed in $n$ bins?
+\end{quest}
+
+\begin{solution}\
+\vspace{0.5em}
+Assume bins are distinguishable.
+
+\textbf{1a. Let objects be distinguishable.}
+
+$\Rightarrow$ $n^r$ ways (since each object can be placed in any of the $n$ bins).
+
+\vspace{0.5em}
+\textbf{1b. Now assume 1a AND $\leq 1$ object/bin.}
+
+$\Rightarrow$ $n$P$r = \frac{n!}{(n-r)!}$. This is because after placing an object into some distinguishable bin, you can no longer choose this bin again.
+
+(so the product would look like $n\cdot(n-1)\cdot(n-2)\cdot ... $)
+
+\vspace{1em}
+
+\textbf{2a. Let objects be indistinguishable.}
+
+\vspace{0.5em}
+
+\textbf{2b. If $\leq 1$ object/bin, simple.} $n\choose r$, since we have repeated permutations.
+
+\vspace{0.5em}
+For 2a, we must be more careful. One "trick" is to use a sticks argument -- suppose all $r$ objects are layed across a floor -- to create bins, simply add \textit{boundaries} before or after each object.
+
+To have $n$ bins, we will have $n-1$ boundaries. There exist at least $r$ spaces, but because we can put all objects into the first bin, there must be at least $n-1$ spaces at the end to put all the boundaries at.
+
+$\therefore$ there are ${r+n-1}\choose{n-1}$.
+\end{solution}
+
+\begin{rem*}
+We only covered 4 situations, there is something called the \textbf{Twelvefold way} that includes when bins are indistinguishable, and if each bin has $\geq 1$ object each.
+\end{rem*}
+
+\begin{quest}
+How many triples $(a,b,c)$ of nonnegative integers are there $s.t.\ a+b+c=100$?
+\end{quest}
+
+\begin{solution}
+
+This question can be reformulated as the previous, where we have $r=100$ indistinguishable objects and $n=3$ bins. Thus we have $102\choose2$ ways.
+\end{solution}
+
+\begin{quest}
+Suppose you can place $n$ points on a circle s.t. no 3 chords between them meet at an interior point. How many interior intersection points are there?
+\end{quest}
+
+\begin{solution} \
+\vspace{0.5em}
+
+Notice that an intersection point can be determine by 2 lines i.e. 4 points.
+
+$\therefore$ in terms of $n$, we have $n\choose4$
+\end{solution}
+
+\begin{quest}
+Show that \# people who shake hands an odd \# of times is even.
+\end{quest}
+
+\begin{solution}
+\ \vspace{0.5em}
+
+Create a handshake graph -- let nodes be people, and edges represent a handshake between them.
+
+Thus \# handshakes $= \Sigma \text{deg}(v) = 2*edges$
+
+But also $\#$ handshakes $= \Sigma_{\text{deg}(v) \text{ odd}} \text{deg}(v) + \Sigma_{\text{deg}(v) \text{ even}} \text{deg}(v)$
+\end{solution}
+
+\section{Hypergraphs}
+\begin{defn}
+\underline{Hypergraph} - graph that contains (hyper)edges can contain an arbitrary \# of nodes (instead of just 2)
+\end{defn}
+
+\begin{defn}
+\underline{k-uniform hypergraph} - each hyperedge contains $k$ nodes.
+
+$deg(v) = $ \# hyperedges containing $v$
+
+$\Rightarrow k | \Sigma\text{deg}(v)$
+\end{defn}
+\end{document}
